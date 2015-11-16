@@ -10,12 +10,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="#" class="navbar-brand">Evento Software</a>
+          <a href="<?= base_url('eventos')?>" class="navbar-brand">Evento Software</a>
         </div>
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="nav navbar-nav">
               <li class="active"><a href="<?= base_url('eventos')?>">Home</a></li>
-              <li><a href="<?php base_url('eventos/usuarios/index')?>">Listar Usuarios Registrados</a></li>
+              <li><a href="<?php echo base_url('eventos/usuarios/index')?>">Listar Usuarios Registrados</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div><!--/.nav-collapse -->

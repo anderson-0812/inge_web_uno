@@ -79,7 +79,7 @@ class usuarios extends MX_Controller{
         
         if ($this->db->trans_status() === FALSE) {
             $this->db->trans_rollback();
-            echo '<div class="alert alert-danger">Algo salio mal en el proceso de guardar datos</div>';
+            echo '<div class="alert alert-danger">Algo salio mal en el proceso de actualizar datos</div>';
 //            echo error_msg('Algo salio mal en el proceso de guardar datos');
         } else {
             $this->db->trans_commit(); // finaliza la transaccion de beging 
@@ -87,6 +87,31 @@ class usuarios extends MX_Controller{
         
     }
     function delete_usuario($id_usuario) {
+         $this->db->trans_begin();
+         
+        $afectado = $this->generic_model->delete('usuarios', array('id'=>$id_usuario));
+        
+        if($afectado >0){
+            echo "<script>alert('Se a eliminado correctamente');</script>";
+//             echo '<br><div class="alert alert-success">Se a eliminado correctamente</div>';
+        }else{
+//            $this->index();
+            echo "<script>alert('No se a eliminado vuelva a intentar');</script>";
+//            echo '<br><div class="alert alert-danger">No se ha eliminado el registro favor vuelva a intentarlo</div>';
+            $this->db->trans_rollback(); // regresa la base de datosa un estado correcto antes del beging
+//            die();
+        }
+        
+        if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
+            echo "<script>alert('El proceso a fallado, No se a eliminado vuelva a intentar');</script>";
+            $this->index();
+//            echo '<div class="alert alert-danger">Algo salio mal en el proceso de eliminar registro</div>';
+//            echo error_msg('Algo salio mal en el proceso de guardar datos');
+        } else {
+            $this->db->trans_commit(); // finaliza la transaccion de beging 
+        }
+        $this->index();
         
     }
 }
