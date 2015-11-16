@@ -15,7 +15,7 @@
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="nav navbar-nav">
               <li class="active"><a href="<?= base_url('eventos')?>">Home</a></li>
-              <li><a href="<?php echo base_url('eventos/usuarios/index');?>">Listar Usuarios Registrados</a></li>
+              <li><a href="<?php base_url('eventos/usuarios/index')?>">Listar Usuarios Registrados</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -24,76 +24,49 @@
 
     <div class="container">
       <div class="starter-template">
-        <h1><?php echo $evento[0]->nombre_evento; ?></h1>
-        <form id="form_registro" role="form" method="post" action="<?php base_url('eventos/registro/save_register')?>">
-          
-            <!--Cedula-->
-          <div class="form-group">
-            <label for="cedula_usuario">Cédula</label>
-            <input type="text" class="form-control campos" name ="cedula_usuario" id="cedula_usuario"
-                   placeholder="Introduce tu cedula" required="" value="">
-          </div>
-          
-          <!--Nombres--> 
-          <div class="form-group">
-            <label for="nombre_usuario">Nombre</label>
-            <input type="text" class="form-control campos" name="nombre_usuario" id="nombre_usuario"
-                   placeholder="Introduce tu nombre" required="">
-          </div>
-            <!--Apellidos-->
-          <div class="form-group">
-            <label for="apellido_usuario">Apellido</label>
-            <input type="text" class="form-control campos"name="apellido_usuario"  id="apellido_usuario"
-                   placeholder="Introduce tu apellido" required="">
-          </div>
-          
-            <!--Fecha nacimiento--> 
-          <div class="form-group">
-            <label for="fech_facimiento">Fecha de Nacimiento</label>
-            <input type="date" class="datepicker-switch form-control campos" name="fech_facimiento" id="fech_facimiento"
-                   placeholder="Introduce tu fecha de nacimiento" required="">
-          </div>  
-          
-          <div class="form-group">
-            <label for="email_usuario">Email</label>
-            <input type="email" class="form-control campos" name="email_usuario" id="email_usuario"
-                   placeholder="Introduce tu email" required="">
-          </div>
-          
-          <!--telefonoi-->
-          <div class="form-group">
-            <label for="tel_usuario">Telefono</label>
-            <input type="text" class="datepicker-switch form-control campos" name="tel_usuario" id="tel_usuario"
-                   placeholder="Introduce tu numero de telefono" required="">
-          </div> 
-          
-            <!--direccion--> 
-          <div class="form-group">
-            <label for="direccion_usuario">Dirección</label>
-            <input type="text" class="datepicker-switch form-control campos" name="direccion_usuario" id="direccion_usuario"
-                   placeholder="Introduce tu direccion" required="">
-          </div>
+        <h1>Lista de  Usuarios registrados </h1>
+       
+        <table class="table table-striped">
+            <th>Cédula</th>
+            <th>Apellido</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Dirección</th>
+            <th>Telefono</th>
+            <th>Acciones</th>
+            <?php 
+            $tr ='';
+            $td = '';
+            foreach ($lista_usuarios as $value) {
+                $td.="<td> ".$value->cedula."</td>";
+                $td.="<td> ".$value->apellidos_usuario."</td>";
+                $td.="<td> ".$value->nombres_usuario."</td>";
+                $td.="<td> ".$value->correo."</td>";
+                $td.="<td> ".$value->direccion_usuario."</td>";
+                $td.="<td> ".$value->telefono."</td>";
+                
+                $editar = '<a href="'.base_url("eventos/usuarios/edit_usuario").'/'.$value->id
+                        .'"> <i class="glyphicon glyphicon-pencil"> Editar</i></a>';
+                
+                $eliminar = '<br> <a  href="'.base_url("eventos/usuarios/delite_usuario").'/'.$value->id.'">'
+                        .'<i class= "glyphicon glyphicon-trash"/> Eliminar </a>';
+                
+                $td.="<td> ".$editar.$eliminar
+                        
+                        ."</td>";
+//                $td .= "<td> ".$eliminar
+//                        
+//                        ."</td>";
+                $tr .= "<tr>". $td ."</tr>";
+                
+                echo $tr;
+                $tr ='';
+                $td ='';
+                
+            }
+            ?>
             
-            <!--Tipo pago --> 
-          <div class="form-group">
-            <label for="tipo_pago">Tipo de Pago</label>
-            <select name="tipo_pago" id="tipo_pago" class="form-control">
-                <?php 
-                    foreach ($pago as $value) {
-                        echo "<option value='".$value->id."'>". $value->nombre_pago  ."</option>";
-                    }
-                ?>
-            </select>
-          </div>
-            
-            <!--Ocultos-->
-            <div class="form-group">
-            <!--<label for="direccion_usuario">Dirección</label>-->
-            <input type="hidden" class="datepicker-switch form-control" name="evento_id" id="evento_id"
-                    value="<?php echo $evento[0]->id;?>">
-          </div>
-          <button id="btn_guardar" type="submit" class="btn btn-default" data-target="resultado">Guardar Registro</button>
-        </form>
+        </table>
         <div id="resultado"></div>
       </div>
         <?php 
@@ -141,14 +114,12 @@ $(document).ready(function(){
             
 //            alert('Resgistro Guardada Exitosamente');
              $("#resultado").html(data);
-//             if(data == '<div class="alert alert-success">Se guardo con exito</div>'){
+             if(data == '<div class="alert alert-success">Se guardo con exito</div>'){
                  setTimeout(function(){
-                   alert('entro alevento de tiempo');
-//                   $("#cedula_usuario").removeAttr('value');
-                   $(".campos").val('');
-
+                   //alert('entro alevento de tiempo');
+                   $("[class=campos]").val('');
                },200);
-//             }
+             }
            // c.close();
 //                $('div#sending_form').prepend(data); //Añadimos la respuesta AJAX a nuestro div de notificación de respuesta
             }); 

@@ -23,12 +23,12 @@ class registro extends MX_Controller{
     public function index($id_evento)
 	{
 //        echo "sadsd";
-            $res['evento']=  $this->get_evento();
+            $res['evento']=  $this->get_evento($id_evento);
             $res['pago'] = $this->get_pago_tipo();
 		$this->load->view('estructura_registro',$res);
 	}
-    function get_evento() {
-        $evento = $this->generic_model->get('eventos');
+    function get_evento($id_evento) {
+        $evento = $this->generic_model->get('eventos',array('id'=>$id_evento));
         return $evento;
     }
     function get_pago_tipo() {
@@ -49,6 +49,14 @@ class registro extends MX_Controller{
         
         $evento_id = $this->input->post('evento_id');
         
+        // valido si ya existe
+        $existe = $this->validar_existencia($cedula);
+//        print_r($existe);
+        echo "<br>";
+        if($existe==false){
+            echo '<div class="alert alert-danger">Ya estas Registrado no puedes hacerlo de nuevo</div>';
+            die();
+        }
         // Guardo los usuarios 
         $data = array('cedula' => $cedula,
             'nombres_usuario'=>$nombre,
@@ -68,24 +76,37 @@ class registro extends MX_Controller{
         
             $save1 = $this->generic_model->save($data1,'evento_usuarios');
             if($save1){
-                
-                echo success_msg(' <br> Se guardo con exito');
+                echo '<div class="alert alert-success">Se guardo con exito</div>';
+//                echo success_msg(' <br> Se guardo con exito');
             }else{
-                echo error_msg('No se ha guardado en la base de datos revise sus entradas');
+                            echo '<div class="alert alert-danger">No se ha guardado en la base de datos revise sus entradas</div>';
+//                echo error_msg('No se ha guardado en la base de datos revise sus entradas');
             $this->db->trans_rollback(); // regresa la base de datosa un estado correcto antes del beging
             die(); // mata el proceso
             }
         } else {
-            echo error_msg('No se ha guardado en la base de datos revise sus entradas');
+            echo '<div class="alert alert-danger">No se ha guardado en la base de datos revise sus entradas</div>';
+//            echo error_msg('No se ha guardado en la base de datos revise sus entradas');
             $this->db->trans_rollback(); // regresa la base de datosa un estado correcto antes del beging
             die(); // mata el proceso
         }
         // verifico que todo elproceso en si este bien ejecutado
         if ($this->db->trans_status() === FALSE) {
             $this->db->trans_rollback();
-            echo error_msg('Algo salio mal en el proceso de guardar datos');
+            echo '<div class="alert alert-danger">Algo salio mal en el proceso de guardar datos</div>';
+//            echo error_msg('Algo salio mal en el proceso de guardar datos');
         } else {
             $this->db->trans_commit(); // finaliza la transaccion de beging 
+        }
+    }
+    
+    function validar_existencia($cedula) {
+        $datos = $this->generic_model->get('usuarios',array('cedula'=>$cedula));
+        
+        if(!empty($datos)){
+            return false;
+        }else{
+            return true;
         }
     }
     

@@ -14,7 +14,7 @@
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="nav navbar-nav">
               <li class="active"><a href="<?= base_url('eventos')?>">Home</a></li>
-            <li><a href="#about">About</a></li>
+              <li><a href="<?php echo base_url('eventos/usuarios/index');?>">Listar Usuarios Registrados</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -36,7 +36,7 @@
       </div>
         <?php 
 //        echo base_url('csclinical/paciente');
-    print_r($evento);
+//    print_r($evento);
 ?>
         
     </div><!-- /.container -->
