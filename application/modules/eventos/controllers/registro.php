@@ -79,10 +79,10 @@ class registro extends MX_Controller{
                 echo '<div class="alert alert-success">Se guardo con exito</div>';
 //                echo success_msg(' <br> Se guardo con exito');
             }else{
-                            echo '<div class="alert alert-danger">No se ha guardado en la base de datos revise sus entradas</div>';
+                echo '<div class="alert alert-danger">No se ha guardado en la base de datos revise sus entradas</div>';
 //                echo error_msg('No se ha guardado en la base de datos revise sus entradas');
-            $this->db->trans_rollback(); // regresa la base de datosa un estado correcto antes del beging
-            die(); // mata el proceso
+                $this->db->trans_rollback(); // regresa la base de datosa un estado correcto antes del beging
+                die(); // mata el proceso
             }
         } else {
             echo '<div class="alert alert-danger">No se ha guardado en la base de datos revise sus entradas</div>';
