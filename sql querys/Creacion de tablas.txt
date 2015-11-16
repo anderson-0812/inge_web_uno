@@ -1,0 +1,50 @@
+CREATE TABLE `tipos_pago` (
+`id`  int(11) NOT NULL AUTO_INCREMENT ,
+`nombre_pago`  varchar(255) CHARACTER SET utf8 NOT NULL ,
+`detalle_pago`  varchar(255) CHARACTER SET utf8 NOT NULL ,
+PRIMARY KEY (`id`)
+)
+;
+
+CREATE TABLE `usuarios` (
+`id`  int NOT NULL AUTO_INCREMENT ,
+`cedula`  varchar(15) NOT NULL ,
+`nombres_usuario`  varchar(255) CHARACTER SET utf8 NOT NULL ,
+`apellidos_usuario`  varchar(255) CHARACTER SET utf8 NOT NULL ,
+`correo`  varchar(255) NULL ,
+`fecha_nacimiento`  date NOT NULL ,
+`direccion_usuario`  varchar(255) CHARACTER SET utf8 NOT NULL ,
+`telefono`  int(11) NULL ,
+`forma_pago`  int NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`forma_pago`) REFERENCES `tipos_pago` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+)
+;
+
+
+CREATE TABLE `eventos` (
+`id`  int NOT NULL AUTO_INCREMENT ,
+`nombre_evento`  varchar(100) CHARACTER SET utf8 NOT NULL ,
+`direccion_evento`  varchar(250) NOT NULL ,
+`fecha_inicio`  date NOT NULL ,
+`fecha_final`  date NOT NULL ,
+`hora_inicio`  time NOT NULL ,
+`hora_final`  time NOT NULL ,
+`lim_personas`  int(11) NULL ,
+`detalle_evento`  varchar(600) CHARACTER SET utf8 NULL ,
+PRIMARY KEY (`id`)
+)
+;
+
+CREATE TABLE `evento_usuarios` (
+`id`  int(11) NOT NULL AUTO_INCREMENT ,
+`id_evento`  int NOT NULL ,
+`id_usuario`  int NOT NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`id_evento`) REFERENCES `web_app_inge_web`.`eventos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (`id_usuario`) REFERENCES `web_app_inge_web`.`usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+)
+;
+
+
+
