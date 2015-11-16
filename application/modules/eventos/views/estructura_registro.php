@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 	<meta charset="utf-8">
 	<title>Formulario registro Evento</title>
@@ -10,10 +10,13 @@
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
 
+<link href="<?= base_url('eventos/css/datepicker.css') ?>" rel="stylesheet" type="text/css" />
+ 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
         <!--esto es importado--> 
-	<style type="text/css">
+	
+        <style type="text/css">
 
 	::selection{ background-color: #E13300; color: white; }
 	::moz-selection{ background-color: #E13300; color: white; }
@@ -75,6 +78,7 @@
 </head>
 <?php 
     $res['evento']=$evento;
-    $this->load->view('estructura_home',$res);
+    $res['pago']=$pago;
+    $this->load->view('formulario_registro',$res);
 ?>
 </html>
