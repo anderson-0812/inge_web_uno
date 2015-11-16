@@ -15,7 +15,7 @@
           <ul class="nav navbar-nav">
               <li class="active"><a href="<?= base_url('eventos')?>">Home</a></li>
               <li><a href="<?php echo base_url('eventos/usuarios/index');?>">Listar Usuarios Registrados</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <!--<li><a href="#contact">Contact</a></li>-->
           </ul>
         </div><!--/.nav-collapse -->
       </div>
