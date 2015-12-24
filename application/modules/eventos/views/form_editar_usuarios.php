@@ -5,7 +5,7 @@
       <div class="container">
         <div class="navbar-header">
           <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
-            <span class="sr-only">Toggle navigation</span>
+            <span class="sr-only"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -27,76 +27,80 @@
         <h1>Editar Datos Usuario</h1>
         <div id="conte_formulario">
             <form id="form_registro_edit" role="form" method="post" action="<?php base_url('eventos/usuarios/edit_usuario')?>">
+                <fieldset>
+                    <legend>Edicion del Registro Al Evento </legend>
+                    <dl>
+                        <!--Cedula-->
+                      <div class="form-group">
+                          <dd><label for="cedula_usuario">Cédula</label></dd>
+                        <dd><input type="text" class="form-control campos" name ="cedula_usuario" id="cedula_usuario"
+                                   placeholder="Introduce tu cedula" required="" value="<?php echo $datos_usuario[0]->cedula ?> "></dd>
+                      </div>
 
-                <!--Cedula-->
-              <div class="form-group">
-                <label for="cedula_usuario">Cédula</label>
-                <input type="text" class="form-control campos" name ="cedula_usuario" id="cedula_usuario"
-                       placeholder="Introduce tu cedula" required="" value="<?php echo $datos_usuario[0]->cedula ?> ">
-              </div>
+                      <!--Nombres--> 
+                      <div class="form-group">
+                        <dd><label for="nombre_usuario">Nombre</label></dd>
+                        <dd><input type="text" class="form-control campos" name="nombre_usuario" id="nombre_usuario"
+                               placeholder="Introduce tu nombre" required="" value="<?php echo $datos_usuario[0]->nombres_usuario ?> "></dd>
+                      </div>
+                        <!--Apellidos-->
+                      <div class="form-group">
+                        <dd><label for="apellido_usuario">Apellido</label></dd>
+                        <dd><input type="text" class="form-control campos"name="apellido_usuario"  id="apellido_usuario"
+                               placeholder="Introduce tu apellido" required="" value="<?php echo $datos_usuario[0]->apellidos_usuario ?> " ></dd>
+                      </div>
 
-              <!--Nombres--> 
-              <div class="form-group">
-                <label for="nombre_usuario">Nombre</label>
-                <input type="text" class="form-control campos" name="nombre_usuario" id="nombre_usuario"
-                       placeholder="Introduce tu nombre" required="" value="<?php echo $datos_usuario[0]->nombres_usuario ?> ">
-              </div>
-                <!--Apellidos-->
-              <div class="form-group">
-                <label for="apellido_usuario">Apellido</label>
-                <input type="text" class="form-control campos"name="apellido_usuario"  id="apellido_usuario"
-                       placeholder="Introduce tu apellido" required="" value="<?php echo $datos_usuario[0]->apellidos_usuario ?> " >
-              </div>
+                        <!--Fecha nacimiento--> 
+                      <div class="form-group">
+                        <dd><label for="fech_facimiento">Fecha de Nacimiento</label></dd>
+                        <dd><input type="date" class="datepicker-switch form-control campos" name="fech_facimiento" id="fech_facimiento"
+                               placeholder="Introduce tu fecha de nacimiento" required="" value="<?php echo $datos_usuario[0]->fecha_nacimiento ?> " ></dd>
+                      </div>  
 
-                <!--Fecha nacimiento--> 
-              <div class="form-group">
-                <label for="fech_facimiento">Fecha de Nacimiento</label>
-                <input type="date" class="datepicker-switch form-control campos" name="fech_facimiento" id="fech_facimiento"
-                       placeholder="Introduce tu fecha de nacimiento" required="" value="<?php echo $datos_usuario[0]->fecha_nacimiento ?> " >
-              </div>  
+                      <div class="form-group">
+                        <dd><label for="email_usuario">Email</label></dd>
+                        <dd><input type="email" class="form-control campos" name="email_usuario" id="email_usuario"
+                               placeholder="Introduce tu email" required="" value="<?php echo $datos_usuario[0]->correo ?> " ></dd>
+                      </div>
 
-              <div class="form-group">
-                <label for="email_usuario">Email</label>
-                <input type="email" class="form-control campos" name="email_usuario" id="email_usuario"
-                       placeholder="Introduce tu email" required="" value="<?php echo $datos_usuario[0]->correo ?> " >
-              </div>
+                      <!--telefonoi-->
+                      <div class="form-group">
+                        <dd><label for="tel_usuario">Telefono</label></dd>
+                        <dd><input type="text" class="datepicker-switch form-control campos" name="tel_usuario" id="tel_usuario"
+                               placeholder="Introduce tu numero de telefono" required="" value="<?php echo $datos_usuario[0]->telefono ?> " ></dd>
+                      </div> 
 
-              <!--telefonoi-->
-              <div class="form-group">
-                <label for="tel_usuario">Telefono</label>
-                <input type="text" class="datepicker-switch form-control campos" name="tel_usuario" id="tel_usuario"
-                       placeholder="Introduce tu numero de telefono" required="" value="<?php echo $datos_usuario[0]->telefono ?> " >
-              </div> 
+                        <!--direccion--> 
+                      <div class="form-group">
+                        <dd><label for="direccion_usuario">Dirección</label></dd>
+                        <dd><input type="text" class="datepicker-switch form-control campos" name="direccion_usuario" id="direccion_usuario"
+                               placeholder="Introduce tu direccion" required="" value="<?php echo $datos_usuario[0]->direccion_usuario ?> " ></dd>
+                      </div>
 
-                <!--direccion--> 
-              <div class="form-group">
-                <label for="direccion_usuario">Dirección</label>
-                <input type="text" class="datepicker-switch form-control campos" name="direccion_usuario" id="direccion_usuario"
-                       placeholder="Introduce tu direccion" required="" value="<?php echo $datos_usuario[0]->direccion_usuario ?> " >
-              </div>
+                        <!--Tipo pago --> 
+                      <div class="form-group">
+                        <dd><label for="tipo_pago">Tipo de Pago</label></dd>
+                        <dd><select name="tipo_pago" id="tipo_pago" class="form-control">
+                            <?php 
+                                foreach ($pago as $value) {
+                                    if($datos_usuario[0]->forma_pago == $value->id){
+                                        echo "<option value='".$value->id."' selected='' >". $value->nombre_pago  ."</option>";
+                                    }else{
 
-                <!--Tipo pago --> 
-              <div class="form-group">
-                <label for="tipo_pago">Tipo de Pago</label>
-                <select name="tipo_pago" id="tipo_pago" class="form-control">
-                    <?php 
-                        foreach ($pago as $value) {
-                            if($datos_usuario[0]->forma_pago == $value->id){
-                                echo "<option value='".$value->id."' selected='' >". $value->nombre_pago  ."</option>";
-                            }else{
+                                        echo "<option value='".$value->id."'>". $value->nombre_pago  ."</option>";
+                                    }
+                                }
+                            ?>
+                        </select></dd>
+                      </div>
 
-                                echo "<option value='".$value->id."'>". $value->nombre_pago  ."</option>";
-                            }
-                        }
-                    ?>
-                </select>
-              </div>
-
-                <!--Ocultos-->
-                <div class="form-group">
-                    <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $datos_usuario[0]->id?>">
-              </div>
-              <button id="btn_editar" type="submit" class="btn btn-default" data-target="resultado">Editar Datos</button>
+                        <!--Ocultos-->
+                        <div class="form-group">
+                            <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $datos_usuario[0]->id?>">
+                      </div>
+                      <button id="btn_editar" type="submit" class="btn btn-default" data-target="resultado">Editar Datos</button>
+                    </dl>
+                </fieldset>
             </form>
         </div>
         <div id="resultado"></div>

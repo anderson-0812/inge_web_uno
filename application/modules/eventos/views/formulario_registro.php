@@ -26,73 +26,80 @@
       <div class="starter-template">
         <h1><?php echo $evento[0]->nombre_evento; ?></h1>
         <form id="form_registro" role="form" method="post" action="<?php base_url('eventos/registro/save_register')?>">
-          
-            <!--Cedula-->
-          <div class="form-group">
-            <label for="cedula_usuario">Cédula</label>
-            <input type="text" class="form-control campos" name ="cedula_usuario" id="cedula_usuario"
-                   placeholder="Introduce tu cedula" required="" value="">
-          </div>
-          
-          <!--Nombres--> 
-          <div class="form-group">
-            <label for="nombre_usuario">Nombre</label>
-            <input type="text" class="form-control campos" name="nombre_usuario" id="nombre_usuario"
-                   placeholder="Introduce tu nombre" required="">
-          </div>
-            <!--Apellidos-->
-          <div class="form-group">
-            <label for="apellido_usuario">Apellido</label>
-            <input type="text" class="form-control campos"name="apellido_usuario"  id="apellido_usuario"
-                   placeholder="Introduce tu apellido" required="">
-          </div>
-          
-            <!--Fecha nacimiento--> 
-          <div class="form-group">
-            <label for="fech_facimiento">Fecha de Nacimiento</label>
-            <input type="date" class="datepicker-switch form-control campos" name="fech_facimiento" id="fech_facimiento"
-                   placeholder="Introduce tu fecha de nacimiento" required="">
-          </div>  
-          
-          <div class="form-group">
-            <label for="email_usuario">Email</label>
-            <input type="email" class="form-control campos" name="email_usuario" id="email_usuario"
-                   placeholder="Introduce tu email" required="">
-          </div>
-          
-          <!--telefonoi-->
-          <div class="form-group">
-            <label for="tel_usuario">Telefono</label>
-            <input type="text" class="datepicker-switch form-control campos" name="tel_usuario" id="tel_usuario"
-                   placeholder="Introduce tu numero de telefono" required="">
-          </div> 
-          
-            <!--direccion--> 
-          <div class="form-group">
-            <label for="direccion_usuario">Dirección</label>
-            <input type="text" class="datepicker-switch form-control campos" name="direccion_usuario" id="direccion_usuario"
-                   placeholder="Introduce tu direccion" required="">
-          </div>
-            
-            <!--Tipo pago --> 
-          <div class="form-group">
-            <label for="tipo_pago">Tipo de Pago</label>
-            <select name="tipo_pago" id="tipo_pago" class="form-control">
-                <?php 
-                    foreach ($pago as $value) {
-                        echo "<option value='".$value->id."'>". $value->nombre_pago  ."</option>";
-                    }
-                ?>
-            </select>
-          </div>
-            
-            <!--Ocultos-->
-            <div class="form-group">
-            <!--<label for="direccion_usuario">Dirección</label>-->
-            <input type="hidden" class="datepicker-switch form-control" name="evento_id" id="evento_id"
-                    value="<?php echo $evento[0]->id;?>">
-          </div>
-          <button id="btn_guardar" type="submit" class="btn btn-default" data-target="resultado">Guardar Registro</button>
+            <!--Fieldset sirve para agrupar los controles y elementos relacionados facilitando la navegacion de los usuarios -->
+            <fieldset> 
+                <!--sE DEFINE UN TITULO PARA EL TAG FIELDSET-->
+                <legend>Registro Al Evento </legend>
+                <dl>
+                <!--Cedula-->
+              <div class="form-group">
+                  <dd><label for="cedula_usuario">Cédula</label></dd>
+                <dd><input type="text" class="form-control campos" name ="cedula_usuario" id="cedula_usuario"
+                       placeholder="Introduce tu cedula" required="" value=""></dd>
+              </div>
+
+              <!--Nombres--> 
+              <div class="form-group">
+                  <!--dd usamos para describir un item de una losta de definiciones--> 
+                <dd><label for="nombre_usuario">Nombre</label></dd>
+                <dd><input type="text" class="form-control campos" name="nombre_usuario" id="nombre_usuario"
+                       placeholder="Introduce tu nombre" required=""></dd>
+              </div>
+                <!--Apellidos-->
+              <div class="form-group">
+                <dd><label for="apellido_usuario">Apellido</label></dd>
+                <dd><input type="text" class="form-control campos"name="apellido_usuario"  id="apellido_usuario"
+                       placeholder="Introduce tu apellido" required=""></dd>
+              </div>
+
+                <!--Fecha nacimiento--> 
+              <div class="form-group">
+                <dd><label for="fech_facimiento">Fecha de Nacimiento</label></dd>
+                <dd><input type="date" class="datepicker-switch form-control campos" name="fech_facimiento" id="fech_facimiento"
+                       placeholder="Introduce tu fecha de nacimiento" required=""></dd>
+              </div>  
+
+              <div class="form-group">
+                <dd><label for="email_usuario">Email</label></dd>
+                <dd><input type="email" class="form-control campos" name="email_usuario" id="email_usuario"
+                       placeholder="Introduce tu email" required=""></dd>
+              </div>
+
+              <!--telefonoi-->
+              <div class="form-group">
+                <dd><label for="tel_usuario">Telefono</label></dd>
+                <dd><input type="text" class="datepicker-switch form-control campos" name="tel_usuario" id="tel_usuario"
+                       placeholder="Introduce tu numero de telefono" required=""></dd>
+              </div> 
+
+                <!--direccion--> 
+              <div class="form-group">
+                <dd><label for="direccion_usuario">Dirección</label></dd>
+                <dd><input type="text" class="datepicker-switch form-control campos" name="direccion_usuario" id="direccion_usuario"
+                       placeholder="Introduce tu direccion" required=""></dd>
+              </div>
+
+                <!--Tipo pago --> 
+              <div class="form-group">
+                <dd><label for="tipo_pago">Tipo de Pago</label></dd>
+                <dd><select name="tipo_pago" id="tipo_pago" class="form-control">
+                    <?php 
+                        foreach ($pago as $value) {
+                            echo "<option value='".$value->id."'>". $value->nombre_pago  ."</option>";
+                        }
+                    ?>
+                </select></dd>
+              </div>
+
+                <!--Ocultos-->
+                <div class="form-group">
+                <!--<label for="direccion_usuario">Dirección</label>-->
+                <input type="hidden" class="datepicker-switch form-control" name="evento_id" id="evento_id"
+                        value="<?php echo $evento[0]->id;?>">
+              </div>
+              <button id="btn_guardar" type="submit" class="btn btn-default" data-target="resultado">Guardar Registro</button>
+                </dl>
+            </fieldset>
         </form>
         <div id="resultado"></div>
       </div>
